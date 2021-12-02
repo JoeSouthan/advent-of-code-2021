@@ -35,7 +35,8 @@ func isIncrease(now int64, previous int64) bool {
 }
 
 func main() {
-	lines, err := readFile("day01/input.txt")
+	path := os.Args[1]
+	lines, err := readFile(path)
 	if err != nil {
 		panic(err)
 	}
