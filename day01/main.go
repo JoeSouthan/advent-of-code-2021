@@ -10,7 +10,6 @@ import (
 func readFile(path string) ([]int64, error) {
 	var lines []int64
 	f, err := os.Open(path)
-
 	if err != nil {
 		return lines, err
 	}
@@ -21,7 +20,6 @@ func readFile(path string) ([]int64, error) {
 
 	for scanner.Scan() {
 		i, err := strconv.ParseInt(scanner.Text(), 10, 64)
-
 		if err != nil {
 			return lines, err
 		}
@@ -38,7 +36,6 @@ func isIncrease(now int64, previous int64) bool {
 
 func main() {
 	lines, err := readFile("day01/input.txt")
-
 	if err != nil {
 		panic(err)
 	}
