@@ -13,31 +13,46 @@ func bitsToInt(s []string) int64 {
 	return r
 }
 
-func part1(lines []string) {
-	rowWidth := len(lines[0])
-	noRows := len(lines)
-	gamma := make([]string, rowWidth)
-	epsilon := make([]string, rowWidth)
+type Count struct {
+	zeroes int64
+	ones   int64
+}
 
-	for r := 0; r < rowWidth; r++ {
-		ones, zeroes := 0, 0
+func mostPopular(lines []string) []Count {
+	var counts []Count
 
-		for c := 0; c < noRows; c++ {
+	for r := 0; r < len(lines[0]); r++ {
+		count := Count{zeroes: 0, ones: 0}
+
+		for c := 0; c < len(lines); c++ {
 			num, _ := strconv.Atoi(strings.Split(lines[c], "")[r])
 			switch num {
 			case 0:
-				zeroes++
+				count.zeroes++
 			case 1:
-				ones++
+				count.ones++
 			}
 		}
 
-		if ones > zeroes {
-			gamma[r] = "1"
-			epsilon[r] = "0"
+		counts = append(counts, count)
+	}
+
+	return counts
+}
+
+func part1(lines []string) {
+	rowWidth := len(lines[0])
+	gamma := make([]string, rowWidth)
+	epsilon := make([]string, rowWidth)
+
+	counts := mostPopular(lines)
+	for i, count := range counts {
+		if count.ones > count.zeroes {
+			gamma[i] = "1"
+			epsilon[i] = "0"
 		} else {
-			gamma[r] = "0"
-			epsilon[r] = "1"
+			gamma[i] = "0"
+			epsilon[i] = "1"
 		}
 	}
 
