@@ -21,6 +21,6 @@ func main() {
 
 	fmt.Println("Part 1")
 	part1(lines)
-	fmt.Println("Part 1")
+	fmt.Println("Part 2")
 	part2(lines)
 }
